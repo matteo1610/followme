@@ -69,9 +69,10 @@ Una volta eseguito il comando run si otterrà una finestra (*Figura 1*) in cui v
 si desiderano generare randomicamente nella simulazione. Successivamente, apparirà un’ulteriore finestra (*Figura 2*) 
 che permetterà di selezionare il tempo da dedicare per l’esecuzione di ogni singolo comando.
 
+![Esempio](./file/images/picture1.png)
 ***Figura 1:** Robots Generator window.*
 
-
+![Esempio](./file/images/picture2.png)
 ***Figura 2**: Time for Instruction window.*
 
 Una volta inseriti i dati iniziali in modo corretto uscirà fuori un’interfaccia grafica in cui sono presenti tre 
@@ -81,6 +82,7 @@ il terzo bottone permette di riavviare l’applicazione per poter fare una nuova
 Al  termine  dell’esecuzione  verrà  visualizzata  la  configurazione  finale  e  il  relativo  tempo  di esecuzione in 
 secondi del programma (*Figura 3*).
 
+![Esempio](./file/images/picture3.png)
 ***Figura 3:** FollowMe App execution finished.*
 
 All’interno  della  cartella file  sono  presenti  due  file  per  poter  effettuare  un’esecuzione  base 
