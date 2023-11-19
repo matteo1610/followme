@@ -1,92 +1,53 @@
 # FollowMe
 
-1. **Introduzione**
+1. **Introduction**
 
-Il progetto “FollowMe” è un’applicazione Java che offre la possibilità di simulare un gruppo di robot che  si  muovono  
-in  uno  spazio  virtuale.  Questa  simulazione  è  supportata  da  una  libreria  Java appositamente sviluppata per 
-gestire il comportamento dei robot all’interno dell’ambiente simulato. È presente anche un’interfaccia grafica annessa 
-che permette agli utenti di visualizzare in modo più chiaro l’ambiente circostante e i robot prima e dopo l’esecuzione 
-del programma.
+The “FollowMe” project is a Java application that offers the possibility of simulating a group of robots moving in a virtual space. This simulation is supported by a Java library specifically developed to manage the behavior of robots within the simulated environment. There is also an attached graphical interface that allows users to more clearly visualize the surrounding environment and the robots before and after running the program.
 
-Per lo sviluppo del progetto, ho utilizzato Gradle come sistema di automazione della compilazione e gestione delle 
-dipendenze. Inoltre, ho ritenuto opportuno utilizzare Java SE 17 (LTS) e JavaFX nella versione 20.0.1. La scelta di 
-questa versione di Java garantirà una stabilità a lungo termine, in quanto tale versione verrà supportata per un periodo 
-esteso di tempo.
+For the development of the project, I used Gradle as a build automation and dependency management system. Additionally, I found it appropriate to use Java SE 17 (LTS) and JavaFX in version 20.0.1. Choosing this version of Java will ensure long-term stability, as this version will be supported for an extended period of time.
 
-2. **Responsabilità assegnate**
+2. **Assigned Responsibilities**
 
-Prima di iniziare il processo di sviluppo, ho deliniato gli obiettivi del progetto che sono andato poi a sviluppare per 
-chiarire le specifiche funzionalità da implementare e i requisiti chiave. Ho definito le seguenti responsabilità che ho 
-poi sviluppato nelle classi specificate:
+Before starting the development process, I outlined the objectives of the project which I then developed to clarify the specific features to be implemented and the key requirements. I defined the following responsibilities which I then developed in the specified classes:
 
-- *Caratteristiche dei robot e i relativi comportamenti:*
+- *Characteristics of robots and their behaviors:* Implemented by the `Robot` class that represents a robot in space and specifies its movement and capabilities interaction.
+- *Specification of possible commands within a program:* All classes representing basic commands implement the `RobotCommand` interface (i.e., `MoveCommand`, `MoveRandomCommand`, `SignalCommand`, `UnsignalCommand`, `FollowCommand`, `ContinueCommand`, `StopCommand`). Instead, the classes representing the selection and iteration commands (`RepeatCommand`, `UntilCommand`, `DoForever`) extend the abstract `AbstractIterator` class which in turn implements the `Iterator` interface. The latter is an extension of the `RobotCommand` interface.
+- *Representation of the figures that make up the environment:* This responsibility is assigned to the `Circle` and `Rectangle` classes. They extend the `GeometricShape` class which in turn implements the basic `Shape` interface. These classes represent the possible figures present in the environments and implement some utility methods.
+- *Execution flow management:* Therefore, the initialization of the application, the generation of the robots, the loading of the environment and the program to be executed. These features are implemented in the `Referee`, it acts as the application controller.
+- *Compiling program and environment commands:* The parsing of the program and the loaded environment occurs in the `Handler` class. It is a sort of compiler that verifies syntactic correctness, loads the environment and the program to be executed. This class uses the `ShapeParser` utility class to parse the environment.
+- *Program execution in the swarm:* Once loaded, the program is saved within the `Executor` class which takes care of the correct execution of the program, also managing any nested loops. This class uses the `CommandExecutor` utility class to execute individual commands.
 
-Implementata dalla classe Robot che rappresenta un robot nello spazio e specifica le sue capacità di movimento e  di 
-interazione.
+For better data consistency I created the following classes which allow me to represent the various data types more specifically: `Point`, `Direction`, `Signal`. Furthermore, for better organization and management of responsibilities I also created some utility classes: `DirectionCalculator`, `DistanceCalculator`, `RandomPointGenerator`, `CommandRow`.
 
-- *Specifica dei comandi possibili all’interno di un programma:*
+3. **Instructions for execution**
 
-Tutte  le  classi  che  rappresentano  i  comandi  di  base  implementano  l’interfaccia RobotCommand (ovvero,  
-MoveCommand,  MoveRandomCommand,  SignalCommand, UnsignalCommand, FollowCommand, ContinueCommand, StopCommand). Invece, 
-le classi che rappresentano i comandi di selezione ed iterazione (RepeatCommand, UntilCommand, DoForever) estendono la 
-classe astratta AbstractIterator che a sua volta implementa l’interfaccia Iterator. Quest’ultima è un’estensione 
-dell’interfaccia RobotCommand.
+As already specified, the program created uses Gradle and Java. Therefore, to compile it, simply execute the command from the `gradle build` terminal and to execute it the `gradle run` command.
 
-- *Rappresentazione delle figure che compongono l’ambiente:*
+Once the run command has been executed you will get a window (*Figure 1*) in which you will first be asked for the number of robots that you want to generate randomly in the simulation. Subsequently, another window will appear (*Figure 2*) which will allow you to select the time to dedicate to the execution of each individual command.
 
-  Questa responsabilità è assegnata alle classi Circle e Rectangle. Esse estendono la classe GeometricShape  che  a  sua  
-- volta  implementa  l’interfaccia  di  base Shape.  Tali  classi rappresentano le possibili figure presenti 
-- nell’ambienti ed implementano alcuni metodi di utilità.
+<p align="center">
+<img src="./file/images/picture1.png" alt="picture1" height="150">
+</p>
 
-- *Gestione del flusso di esecuzione:*
+***Figure 1:** Robots Generator window.*
 
-  Dunque,  l’inizializzazione  dell’applicazione,  la  generazione  dei  robot,   il  caricamento dell’ambiente e del 
-- programma da eseguire. Tali funzionalità sono implementate nel Referee, esso funge da controller dell’applicazione.
+<p align="center">
+<img src="./file/images/picture2.png" alt="picture3" height="150">
+</p>
 
-- *Compilazione dei comandi del programma e dell’ambiente:*
+***Figure2 2**: Time for Instruction window.*
 
-  Il parsing del programma e dell’ambiente caricato avviene nella classe Handler. Esso, è una sorta di compilatore che 
-- verifica la correttezza sintattica, carica l’ambiente e il programma da eseguire. Tale classe, per il parsing 
-- dell’ambiente utilizza la classe di utilità ShapeParser.
 
-- *Esecuzione del programma nello sciame:*
+Once the initial data has been entered correctly, a graphical interface will appear in which there are three buttons: the first button to load the environment file, the second button to load the program and run it, the third button allows you to restart the application to be able to do a new simulation.
 
-  Una volta caricato il programma viene salvato all’interno della classe Executor che si occupa della corretta 
-- esecuzione del programma gestendo anche eventuali loop annidati. Tale classe, per l’esecuzione dei singoli comandi 
-- utilizza la classe di utilità CommandExecutor.*
+At the end of the execution, the final configuration and the relative execution time will be displayed seconds of the program (*Figure 3*).
 
-Per una miglior consistenza dei dati ho creato le seguenti classi che mi permettono di rappresentare in modo più 
-specifico i vari tipi di dato: Point, Direction, Signal. Inoltre, per una miglior organizzazione  e  gestione  delle  
-responsabilità  ho  creato  anche  alcune  classi  di  utilità: DirectionCalculator, DistanceCalculator, 
-RandomPointGenerator, CommandRow.
+<p align="center">
+<img src="./file/images/picture3.png" alt="picture3" width="400">
+</p>
 
-3. **Istruzioni per l’esecuzione**
+***Figure 3:** FollowMe App execution finished.*
 
-Come già specificato, il programma realizzato utilizza Gradle e Java. Dunque, per compilarlo basterà eseguire il comando 
-da terminale gradle build e per eseguirlo il comando gradle run.
-
-Una volta eseguito il comando run si otterrà una finestra (*Figura 1*) in cui verrà chiesto prima il numero di robot che 
-si desiderano generare randomicamente nella simulazione. Successivamente, apparirà un’ulteriore finestra (*Figura 2*) 
-che permetterà di selezionare il tempo da dedicare per l’esecuzione di ogni singolo comando.
-
-![Esempio](./file/images/picture1.png)
-***Figura 1:** Robots Generator window.*
-
-![Esempio](./file/images/picture2.png)
-***Figura 2**: Time for Instruction window.*
-
-Una volta inseriti i dati iniziali in modo corretto uscirà fuori un’interfaccia grafica in cui sono presenti tre 
-bottoni: il primo bottone per caricare il file dell’ambiente, il secondo bottone per caricare il programma ed eseguirlo, 
-il terzo bottone permette di riavviare l’applicazione per poter fare una nuova simulazione.
-
-Al  termine  dell’esecuzione  verrà  visualizzata  la  configurazione  finale  e  il  relativo  tempo  di esecuzione in 
-secondi del programma (*Figura 3*).
-
-![Esempio](./file/images/picture3.png)
-***Figura 3:** FollowMe App execution finished.*
-
-All’interno  della  cartella file  sono  presenti  due  file  per  poter  effettuare  un’esecuzione  base 
-dell’applicazione:
-
-- /CardelliniMatteo119137/file/environmentProgram.rshp;
-- /CardelliniMatteo119137/file/robotProgram.rprg. 
+Inside the file folder there are two files to be able to carry out a basic execution of the application:
+- ./file/environmentProgram.rshp;
+- ./file/robotProgram.rprg. 
