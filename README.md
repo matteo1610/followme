@@ -50,16 +50,13 @@ Once the run command has been executed you will get a window (*Figure 1*) in whi
 number of robots that you want to generate randomly in the simulation. Subsequently, another window will appear 
 (*Figure 2*) which will allow you to select the time to dedicate to the execution of each individual command.
 
-<p style="text-align:center;"><img src="./file/images/picture1.png" alt="picture1" height="150"></p>
+<img src="./file/images/picture1.png" alt="picture1" height="150">
 
 _**Figure 1**: Robots Generator window._
 
-<p style="text-align:center;">
 <img src="./file/images/picture2.png" alt="picture3" height="150">
-</p>
 
 _**Figure 2**: Time for Instruction window._
-
 
 Once the initial data has been entered correctly, a graphical interface will appear in which there are three buttons: 
 the first button to load the environment file, the second button to load the program and run it, the third button allows 
@@ -68,9 +65,7 @@ you to restart the application to be able to do a new simulation.
 At the end of the execution, the final configuration and the relative execution time will be displayed seconds of the 
 program (*Figure 3*).
 
-<p style="text-align:center;">
 <img src="./file/images/picture3.png" alt="picture3" width="400">
-</p>
 
 _**Figure 3:** FollowMe App execution finished._
 
