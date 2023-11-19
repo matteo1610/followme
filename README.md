@@ -60,7 +60,7 @@ number of robots that you want to generate randomly in the simulation. Subsequen
 <img src="./file/images/picture2.png" alt="picture3" height="150">
 </p>
 
-***Figure2 2**: Time for Instruction window.*
+***Figure 2**: Time for Instruction window.*
 
 
 Once the initial data has been entered correctly, a graphical interface will appear in which there are three buttons: 
